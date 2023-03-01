@@ -11,4 +11,8 @@ public class Filme {
         private Long id;
 
         private String nomefilme;
+
+        @ManyToOne
+        @JoinColumn(name="idgenero")
+        private Genero genero;
 }
