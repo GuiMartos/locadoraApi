@@ -10,6 +10,6 @@ public class Ator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
             private Integer id;
 
-    private String nome;
+            private String nome;
 
 }
