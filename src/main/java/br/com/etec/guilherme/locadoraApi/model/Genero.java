@@ -1,6 +1,7 @@
 package br.com.etec.guilherme.locadoraApi.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "genero")
@@ -26,5 +27,18 @@ public class Genero {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Genero genero = (Genero) o;
+        return id.equals(genero.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
