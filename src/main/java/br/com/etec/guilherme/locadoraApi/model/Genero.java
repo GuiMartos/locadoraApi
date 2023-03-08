@@ -1,6 +1,8 @@
 package br.com.etec.guilherme.locadoraApi.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,23 +12,30 @@ public class Genero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
-
         private String descricao;
+
+        @OneToMany(mappedBy = "genero")
+        private List <Filme> filmes = new ArrayList<>();
+
 
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
-
     public String getDescricao() {
         return descricao;
     }
-
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+    public List<Filme> getFilmes() {
+        return filmes;
+    }
+
+    public void setFilmes(List<Filme> filmes) {
+        this.filmes = filmes;
     }
 
     @Override
