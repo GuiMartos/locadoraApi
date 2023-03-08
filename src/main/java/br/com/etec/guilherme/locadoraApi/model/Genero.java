@@ -15,7 +15,7 @@ public class Genero {
         private String descricao;
 
         @OneToMany(mappedBy = "genero")
-        private List <Filme> filmes = new ArrayList<>();
+        private List <Filme> filmesgenero = new ArrayList<>();
 
 
     public Integer getId() {
@@ -30,14 +30,14 @@ public class Genero {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public List<Filme> getFilmes() {
-        return filmes;
+    public List<Filme> getFilmesgenero() {
+        return filmesgenero;
+    }
+    public void setFilmesgenero(List<Filme> filmesgenero) {
+        this.filmesgenero = filmesgenero;
     }
 
-    public void setFilmes(List<Filme> filmes) {
-        this.filmes = filmes;
-    }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
