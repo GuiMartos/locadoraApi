@@ -3,4 +3,4 @@ Create Table Ator(
     nome varchar(50)
 );
 
-Insert into Ator (id, nome) values (1, 'Jack Dylan Grazer');
+Insert into Ator (nome) values ('Jack Dylan Grazer');

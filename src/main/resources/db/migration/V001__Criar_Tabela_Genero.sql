@@ -3,4 +3,4 @@ Create Table Genero(
     descricao varchar(150)
 );
 
-Insert into Genero (id,descricao) values (1,'Animação');
+Insert into Genero (descricao) values ('Animação');
