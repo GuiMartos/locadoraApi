@@ -4,3 +4,5 @@ Create Table Genero(
 );
 
 Insert into Genero (descricao) values ('Animação');
+Insert into Genero (descricao) values ('Comédia');
+Insert into Genero (descricao) values ('Romance');

@@ -4,3 +4,5 @@ Create Table Ator(
 );
 
 Insert into Ator (nome) values ('Jack Dylan Grazer');
+Insert into Ator (nome) values ('Holly Hunter');
+Insert into Ator (nome) values ('Anika Noni Rose');
