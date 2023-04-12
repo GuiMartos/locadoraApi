@@ -1,7 +1,8 @@
 package br.com.etec.guilherme.locadoraApi.model.resource;
 
-import br.com.etec.guilherme.locadoraApi.model.Ator;
-import br.com.etec.guilherme.locadoraApi.model.repository.AtorRepository;
+
+import br.com.etec.guilherme.locadoraApi.model.Genero;
+import br.com.etec.guilherme.locadoraApi.model.repository.GeneroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("atores")
-public class AtorResource {
+@RequestMapping("generos")
+public class GeneroResource {
 
     @Autowired
-    private AtorRepository atorRepository;
+    private GeneroRepository generoRepository;
 
     @GetMapping("/todos")
-    public List<Ator> listarTodosAtores(){
-        return atorRepository.findAll();
+    public List<Genero> listarTodosGeneros(){
+        return generoRepository.findAll();
     }
 }
