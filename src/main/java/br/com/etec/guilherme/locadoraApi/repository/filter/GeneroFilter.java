@@ -14,19 +14,4 @@ public class GeneroFilter {
         this.descricao = descricao;
     }
 
-    public String getNomeator() {
-        return nomeator;
-    }
-
-    public void setNomeator(String nomeator) {
-        this.nomeator = nomeator;
-    }
-
-    public String getNomegenero() {
-        return nomegenero;
-    }
-
-    public void setNomegenero(String nomegenero) {
-        this.nomegenero = nomegenero;
-    }
 }
