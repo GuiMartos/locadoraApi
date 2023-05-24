@@ -4,6 +4,7 @@ import br.com.etec.guilherme.locadoraApi.model.Genero;
 import br.com.etec.guilherme.locadoraApi.repository.filter.GeneroFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
@@ -31,8 +32,33 @@ public class GeneroRepositoryImpl implements GeneroRepositoryQuery{
         criteria.where(predicates);
         criteria.orderBy(builder.asc(root.get("descricao")));
         TypedQuery<Genero> query = manager.createQuery(criteria);
+        adicionarRestricoesDePaginacao(query, pageable);
 
-        return null;
+        return new PageImpl<>(query.getResultList(), pageable, total(generoFilter));
+    }
+
+    private Long total(GeneroFilter generoFilter) {
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
+        CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+        Root<Genero> root = criteria.from(Genero.class);
+
+        Predicate[] predicates = criarRestrições(generoFilter, builder, root);
+        criteria.where(predicates);
+        criteria.orderBy(builder.asc(root.get("descricao")));
+
+        criteria.select(builder.count(root));
+
+        return manager.createQuery(criteria).getSingleResult();
+    }
+
+    private void adicionarRestricoesDePaginacao(TypedQuery<Genero> query, Pageable pageable) {
+
+        int paginaAtual = pageable.getPageNumber();
+        int totalRegistros = pageable.getPageSize();
+        int primeiroRegistroDaPagina = paginaAtual * totalRegistros;
+
+        query.setFirstResult(primeiroRegistroDaPagina);
+        query.setMaxResults(totalRegistros);
     }
 
     private Predicate[] criarRestrições(GeneroFilter generoFilter, CriteriaBuilder builder, Root<Genero> root) {
