@@ -21,6 +21,7 @@ public class GeneroRepositoryImpl implements GeneroRepositoryQuery{
 
     @PersistenceContext
     private EntityManager manager;
+
     @Override
     public Page<Genero> filtrar(GeneroFilter generoFilter, Pageable pageable) {
 

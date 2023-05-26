@@ -1,16 +1,16 @@
 package br.com.etec.guilherme.locadoraApi.repository.filter;
 
 public class FilmeFilter {
-    private String descricao;
+    private String nomefilme;
     private String nomeator;
     private String nomegenero;
 
-    public String getDescricao() {
-        return descricao;
+    public String getNomefilme() {
+        return nomefilme;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setNomefilme(String nomefilme) {
+        this.nomefilme = nomefilme;
     }
 
     public String getNomeator() {
