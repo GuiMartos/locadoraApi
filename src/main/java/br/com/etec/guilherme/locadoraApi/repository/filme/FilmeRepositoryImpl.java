@@ -2,6 +2,7 @@ package br.com.etec.guilherme.locadoraApi.repository.filme;
 
 import br.com.etec.guilherme.locadoraApi.model.Filme;
 import br.com.etec.guilherme.locadoraApi.repository.filter.FilmeFilter;
+import br.com.etec.guilherme.locadoraApi.repository.projections.ResumoFilme;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -23,7 +24,7 @@ public class FilmeRepositoryImpl implements FilmeRepositoryQuery{
     private EntityManager manager;
 
     @Override
-    public Page<Filme> filtrar(FilmeFilter filmeFilter, Pageable pageable) {
+    public Page<ResumoFilme> filtrar(FilmeFilter filmeFilter, Pageable pageable) {
 
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Filme> criteria = builder.createQuery(Filme.class);
