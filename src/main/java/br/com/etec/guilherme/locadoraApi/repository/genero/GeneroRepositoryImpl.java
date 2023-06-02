@@ -29,7 +29,7 @@ public class GeneroRepositoryImpl implements GeneroRepositoryQuery{
         CriteriaQuery<Genero> criteria = builder.createQuery(Genero.class);
         Root<Genero> root = criteria.from(Genero.class);
 
-        Predicate[] predicates = criarRestrições(generoFilter, builder, root);
+        Predicate[] predicates = criarRestricoes(generoFilter, builder, root);
         criteria.where(predicates);
         criteria.orderBy(builder.asc(root.get("descricao")));
         TypedQuery<Genero> query = manager.createQuery(criteria);
@@ -43,7 +43,7 @@ public class GeneroRepositoryImpl implements GeneroRepositoryQuery{
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         Root<Genero> root = criteria.from(Genero.class);
 
-        Predicate[] predicates = criarRestrições(generoFilter, builder, root);
+        Predicate[] predicates = criarRestricoes(generoFilter, builder, root);
         criteria.where(predicates);
         criteria.orderBy(builder.asc(root.get("descricao")));
 
@@ -62,7 +62,7 @@ public class GeneroRepositoryImpl implements GeneroRepositoryQuery{
         query.setMaxResults(totalRegistros);
     }
 
-    private Predicate[] criarRestrições(GeneroFilter generoFilter, CriteriaBuilder builder, Root<Genero> root) {
+    private Predicate[] criarRestricoes(GeneroFilter generoFilter, CriteriaBuilder builder, Root<Genero> root) {
         List<Predicate> predicates = new ArrayList<>();
 
         if (!StringUtils.isEmpty(generoFilter.getDescricao())){
