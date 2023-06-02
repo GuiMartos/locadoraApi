@@ -14,6 +14,12 @@ public class ResumoFilme {
 
     private String descricao; // nome do genero
 
-    private String nomeator; 
+    private String nomeator;
 
+    public ResumoFilme(Long id, String nomefilme, String descricao, String nomeator) {
+        this.id = id;
+        this.nomefilme = nomefilme;
+        this.descricao = descricao;
+        this.nomeator = nomeator;
+    }
 }
