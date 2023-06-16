@@ -33,7 +33,7 @@ public class AtorRepositoryImpl implements AtorRespositoryQuery{
         criteria.where(predicates);
         criteria.orderBy(builder.asc(root.get("nome")));
         TypedQuery<Ator> query = manager.createQuery(criteria);
-        adeicionarRestricoesDePaginacao(query, pageable);
+        adicionarRestricoesDePaginacao(query, pageable);
 
         return new PageImpl<>(query.getResultList(), pageable, total(atorFilter));
     }
@@ -52,7 +52,7 @@ public class AtorRepositoryImpl implements AtorRespositoryQuery{
         return manager.createQuery(criteria).getSingleResult();
     }
 
-    private void adeicionarRestricoesDePaginacao(TypedQuery<Ator> query, Pageable pageable) {
+    private void adicionarRestricoesDePaginacao(TypedQuery<Ator> query, Pageable pageable) {
         int paginaAtual = pageable.getPageNumber();
         int totalRegistros = pageable.getPageSize();
         int primeiroRegistroDaPagina = paginaAtual * totalRegistros;
