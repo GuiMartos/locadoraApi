@@ -27,13 +27,23 @@ public class FilmeRepositoryImpl implements FilmeRepositoryQuery{
     public Page<ResumoFilme> filtrar(FilmeFilter filmeFilter, Pageable pageable) {
 
         CriteriaBuilder builder = manager.getCriteriaBuilder();
-        CriteriaQuery<Filme> criteria = builder.createQuery(Filme.class);
+        CriteriaQuery<ResumoFilme> criteria = builder.createQuery(ResumoFilme.class);
         Root<Filme> root = criteria.from(Filme.class);
 
-        Predicate[] predicates = criarRestrições(filmeFilter, builder, root);
+        criteria.select(builder.construct(ResumoFilme.class
+
+                ,root.get("id")
+                ,root.get("nomefilme")
+                ,root.get("genero").get("descricao")
+                ,root.get("ator").get("nomeator")
+
+        ));
+
+        Predicate[] predicates = criarRestricoes(filmeFilter, builder, root);
         criteria.where(predicates);
         criteria.orderBy(builder.asc(root.get("nomefilme")));
-        TypedQuery<Filme> query = manager.createQuery(criteria);
+
+        TypedQuery<ResumoFilme> query = manager.createQuery(criteria);
         adicionarRestricoesDePaginacao(query, pageable);
 
         return new PageImpl<>(query.getResultList(), pageable, total(filmeFilter));
@@ -44,7 +54,7 @@ public class FilmeRepositoryImpl implements FilmeRepositoryQuery{
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         Root<Filme> root = criteria.from(Filme.class);
 
-        Predicate[] predicates = criarRestrições(filmeFilter, builder, root);
+        Predicate[] predicates = criarRestricoes(filmeFilter, builder, root);
         criteria.where(predicates);
         criteria.orderBy(builder.asc(root.get("nomefilme")));
 
@@ -53,7 +63,7 @@ public class FilmeRepositoryImpl implements FilmeRepositoryQuery{
 
     }
 
-    private void adicionarRestricoesDePaginacao(TypedQuery<Filme> query, Pageable pageable) {
+    private void adicionarRestricoesDePaginacao(TypedQuery<?> query, Pageable pageable) {
 
         int paginaAtual = pageable.getPageNumber();
         int totalRegistros = pageable.getPageSize();
@@ -63,7 +73,7 @@ public class FilmeRepositoryImpl implements FilmeRepositoryQuery{
         query.setMaxResults(totalRegistros);
     }
 
-    private Predicate[] criarRestrições(FilmeFilter filmeFilter, CriteriaBuilder builder, Root<Filme> root) {
+    private Predicate[] criarRestricoes(FilmeFilter filmeFilter, CriteriaBuilder builder, Root<Filme> root) {
         List<Predicate> predicates = new ArrayList<>();
 
         if (!StringUtils.isEmpty(filmeFilter.getNomefilme())) {
@@ -71,7 +81,16 @@ public class FilmeRepositoryImpl implements FilmeRepositoryQuery{
                     "%" + filmeFilter.getNomefilme().toLowerCase() + "%"));
         }
 
+        if (!StringUtils.isEmpty(filmeFilter.getNomefilme())) {
+            predicates.add(builder.like(builder.lower(root.get("genero").get("desricao")),
+                    "%" + filmeFilter.getNomegenero().toLowerCase() + "%"));
+        }
+
+        if (!StringUtils.isEmpty(filmeFilter.getNomefilme())) {
+            predicates.add(builder.like(builder.lower(root.get("ator").get("nomeator")),
+                    "%" + filmeFilter.getNomeator().toLowerCase() + "%"));
+        }
+
         return predicates.toArray((new Predicate[predicates.size()]));
     }
 }
-
